@@ -1246,6 +1246,13 @@ public class AdvancedWebView extends WebView {
 			}
 
 			return true;
+		} catch (SecurityException e) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+				Toast.makeText(context, "Please enable STORAGE permission!",
+					Toast.LENGTH_LONG).show();
+				openAppSettings(context, context.getPackageName());
+			}
+			return false;
 		}
 		// if the download manager app has been disabled on the device
 		catch (IllegalArgumentException e) {
